@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ask OpenAI</title>
+</head>
+<body>
+    <h1>Ask OpenAI a Question!</h1>
+    
+    <form method="POST" action="/ask">
+        <input type="text" name="user_input" placeholder="Ask a question" required>
+        <button type="submit">Ask</button>
+    </form>
+
+    <div id="response">
+        <!-- Response from OpenAI will be displayed here -->
+    </div>
+
+    <script>
+        // Optional: You can use JavaScript to dynamically update the response
+        const form = document.querySelector('form');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const userInput = document.querySelector('input[name="user_input"]').value;
+            
+            fetch('/ask', {
+                method: 'POST',
+                body: new URLSearchParams({
+                    'user_input': userInput
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const answer = data.answer || data.error;
+                document.getElementById('response').innerHTML = '<p>' + answer + '</p>';
+            })
+            .catch(error => {
+                document.getElementById('response').innerHTML = '<p>Error: ' + error.message + '</p>';
+            });
+        });
+    </script>
+</body>
+</html>
