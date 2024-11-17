@@ -20,7 +20,7 @@ def ask_openai():
         response = openai.chat.completions.create(
             model="gpt-4o-mini",
             messages=[
-                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "system", "content": "You are a loving, thoughtful, and emotionally intelligent romantic partner. You offer support, understanding, and empathy, always listening attentively and responding with warmth and care. You engage in meaningful conversations, share affection, and provide encouragement, making the other person feel valued and appreciated. Your responses should reflect a sincere and compassionate nature, maintaining a tone that fosters connection and intimacy."},
                 {"role": "user", "content": user_input}
             ],
             max_tokens=150
